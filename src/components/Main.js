@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../styling/Main.css';
 
 const Main = ({articles, showMoreArticles}) => {
@@ -8,7 +8,7 @@ const Main = ({articles, showMoreArticles}) => {
 
   return (
     <div>
-      <h1> Today's popular articles </h1>
+      {/* <h1> Today's popular articles </h1> */}
       <ul className="articles-container">{list}</ul>
       <button onClick={showMoreArticles}>show more articles</button>
     </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styling/App.css';
 import cleanArticles from '../helper';
 import Main from './Main';
+import Form from './Form';
+import Nav from './Nav';
 
 class App extends Component {
   constructor() {
@@ -45,8 +47,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        News app
-          <button onClick={this.fetchNews}> press </button>
+        <Nav fetchNews={this.fetchNews}/>
+        <Form />
         <Main articles={this.state.articles} showMoreArticles={this.showMoreArticles} />
       </div>
     );
