@@ -7,12 +7,16 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      articles: []
+      articles: [],
+      limit: 10,
+      offset: 0
     }
   }
 
   fetchNews = () => {
-    fetch('https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE')
+    const {limit, offset} = this.state;
+    let url = `https://api.nytimes.com/svc/news/v3/content/nyt/all.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE&limit=${limit}&offset=${offset}`
+    fetch(url)
       .then(response => response.json())
       .then(result => cleanArticles(result.results))
       .then(articles => this.setState({
@@ -21,12 +25,19 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
+  showMoreArticles = () => {
+    this.setState({
+      offset: this.state.offset + 10
+    })
+    this.fetchNews()
+  }
+
   render() {
     return (
       <div className="App">
           News app
           <button onClick={this.fetchNews}> press </button>
-          <Main articles={this.state.articles}/>
+          <Main articles={this.state.articles} showMoreArticles={this.showMoreArticles}/>
       </div>
     );
   }

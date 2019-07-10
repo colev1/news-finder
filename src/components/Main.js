@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../styling/Main.css';
 
-const Main = (props) => {
-  const list = props.articles.map(articles => {
+const Main = ({articles, showMoreArticles}) => {
+  const list = articles.map(articles => {
     return <li> {articles.title} </li>
   })
 
@@ -10,6 +10,7 @@ const Main = (props) => {
     <div>
       <h1> Today's popular articles </h1>
       <ul className="articles-container">{list}</ul>
+      <button onClick={showMoreArticles}>show more articles</button>
     </div>
   )
 }
