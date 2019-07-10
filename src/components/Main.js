@@ -1,15 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../styling/Main.css';
 
-const Main = ({articles, showMoreArticles}) => {
-  const list = articles.map(articles => {
-    return <li> {articles.title} </li>
+const Main = ({ articles, showMoreArticles, filter }) => {
+  let matchingArticles;
+  if (filter) {
+    matchingArticles = articles.filter(article => {
+      return article.title.toLowerCase().includes(filter.toLowerCase())
+    })
+  } else {
+    matchingArticles = articles;
+  }
+
+  let displayedArticles = matchingArticles.map(article => {
+    return <li key={`${article.date}_${article.updated}`}> {article.title} </li>
   })
 
   return (
     <div>
-      <h1> Today's popular articles </h1>
-      <ul className="articles-container">{list}</ul>
+      <ul className="articles-container">{displayedArticles}</ul>
       <button onClick={showMoreArticles}>show more articles</button>
     </div>
   )

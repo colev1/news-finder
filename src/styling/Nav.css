@@ -1,0 +1,18 @@
+.nav-container {
+  align-items: center;
+  background-color: #C4CAD0;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+.nav-button {
+  border-radius: 4px;
+  font-size: 24px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.nav-button:hover {
+  background-color: #878C8F;
+  cursor: pointer;
+}
