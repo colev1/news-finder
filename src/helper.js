@@ -1,6 +1,8 @@
 const cleanArticles = (articles) => {
   return articles.map(article => {
-    return article.title
+    console.log(article)
+    return { title: article.title,
+    id: article.id }
   })
 }
 
