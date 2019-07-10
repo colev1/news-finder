@@ -1,0 +1,15 @@
+form {
+  margin: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  font-size: 24px;
+  margin-left: 20px;
+  border-radius: 8px;
+  font-family: 'Times New Roman', Times, serif;
+  border: solid 1px black;
+}
