@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
-import '../styling/Main.css';
+import React from 'react';
+import '../styling/Form.css';
 
-class Form extends Component {
-  render() {
+const Form = ({filter, changeFilter}) => {
     return (
       <form>
-        <input placeholder="filter"/>
+        <input type="text" placeholder="Filter articles" value={filter} onChange={(e) => changeFilter(e)}/>
       </form>
     )
-  }
 }
 
 export default Form;

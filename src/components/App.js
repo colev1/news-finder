@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       articles: [],
       limit: 10,
-      offset: 0
+      offset: 0,
+      filter: ''
     }
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
   }
 
   displayArticles = (articles) => {
-    if(!this.state.offset) {
+    if (!this.state.offset) {
       this.setState({
         articles
       })
@@ -44,14 +45,30 @@ class App extends Component {
     this.fetchNews();
   }
 
+  changeFilter = (e) => {
+    console.log(e.target.value)
+    this.setState({
+      filter: e.target.value
+    })
+  }
+
   render() {
-    return (
-      <div className="App">
-        <Nav fetchNews={this.fetchNews}/>
-        <Form />
-        <Main articles={this.state.articles} showMoreArticles={this.showMoreArticles} />
-      </div>
-    );
+    const {filter, articles} = this.state; 
+    if (this.state.articles.length) {
+      return (
+        <div className="App">
+          <Nav fetchNews={this.fetchNews} />
+          <Form changeFilter={this.changeFilter} filter={filter}/>
+          <Main articles={articles} showMoreArticles={this.showMoreArticles} filter={filter} />
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <Nav fetchNews={this.fetchNews} />
+        </div>
+      );
+    }
   }
 }
 
