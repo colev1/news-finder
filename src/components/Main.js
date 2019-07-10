@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../styling/App.css';
+import '../styling/Main.css';
 
 const Main = (props) => {
   const list = props.articles.map(articles => {
@@ -9,7 +9,7 @@ const Main = (props) => {
   return (
     <div>
       <h1> Today's popular articles </h1>
-      <ul>{list}</ul>
+      <ul className="articles-container">{list}</ul>
     </div>
   )
 }
