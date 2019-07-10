@@ -2,4 +2,17 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: #C4CAD0;
+  /* height: 200px;/ */
+  padding: 40px;
+}
+
+.nav-button {
+  border-radius: 4px;
+  font-size: 24px;
+}
+
+.nav-button:hover {
+  background-color: #878C8F;
+  cursor: pointer;
 }

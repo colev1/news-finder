@@ -12,7 +12,7 @@ const Main = ({ articles, showMoreArticles, filter }) => {
   }
 
   let displayedArticles = matchingArticles.map(article => {
-    return <li key={article.id}> {article.title} </li>
+    return <li key={`${article.date}_${article.updated}`}> {article.title} </li>
   })
 
   return (
