@@ -17,15 +17,14 @@ class App extends Component {
       .then(titles => this.setState({
         titles
       }))
+      .catch(err => console.log(err))
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
           News app
           <button onClick={this.fetchNews}> press </button>
-        </header>
       </div>
     );
   }
