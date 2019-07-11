@@ -12,7 +12,8 @@ class App extends Component {
       articles: [],
       limit: 10,
       offset: 0,
-      filter: ''
+      filter: '',
+      loadedArticles: false
     }
   }
 
@@ -36,6 +37,9 @@ class App extends Component {
         articles: this.state.articles.concat(articles)
       })
     }
+    this.setState({
+      loadedArticles: true
+    })
   }
 
   showMoreArticles = () => {
@@ -53,22 +57,13 @@ class App extends Component {
   }
 
   render() {
-    const {filter, articles} = this.state; 
-    if (this.state.articles.length) {
-      return (
-        <div className="App">
-          <Nav fetchNews={this.fetchNews} />
-          <Form changeFilter={this.changeFilter} filter={filter}/>
-          <Main articles={articles} showMoreArticles={this.showMoreArticles} filter={filter} />
-        </div>
-      );
-    } else {
-      return (
-        <div className="App">
-          <Nav fetchNews={this.fetchNews} />
-        </div>
-      );
-    }
+    const { filter, articles, loadedArticles } = this.state;
+    return (
+      <div className="App">
+        {loadedArticles ? <Form changeFilter={this.changeFilter} filter={filter} /> : <Nav fetchNews={this.fetchNews} showArticles={loadedArticles} />}
+        <Main articles={articles} showMoreArticles={this.showMoreArticles} filter={filter} />
+      </div>
+    )
   }
 }
 

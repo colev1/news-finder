@@ -1,5 +1,6 @@
 const cleanArticles = (articles) => {
   return articles.map(article => {
+    console.log(article)
     return {
       title: article.title,
       date: article.published_date,
