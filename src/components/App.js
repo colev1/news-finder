@@ -10,16 +10,16 @@ class App extends Component {
     super();
     this.state = {
       articles: [],
-      limit: 10,
-      offset: 0,
       filter: '',
+      count: 0,
+      sections: ['home','arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
       loadedArticles: false
     }
   }
 
   fetchNews = () => {
-    const { limit, offset } = this.state;
-    let url = `https://api.nytimes.com/svc/news/v3/content/nyt/all.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE&limit=${limit}&offset=${offset}`
+    const {sections, count} = this.state;
+    let url = `https://api.nytimes.com/svc/topstories/v2/${sections[count]}.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE`;
     fetch(url)
       .then(response => response.json())
       .then(result => cleanArticles(result.results))
@@ -28,15 +28,9 @@ class App extends Component {
   }
 
   displayArticles = (articles) => {
-    if (!this.state.offset) {
-      this.setState({
-        articles
-      })
-    } else {
       this.setState({
         articles: this.state.articles.concat(articles)
       })
-    }
     this.setState({
       loadedArticles: true
     })
@@ -44,7 +38,7 @@ class App extends Component {
 
   showMoreArticles = () => {
     this.setState({
-      offset: this.state.offset + 10
+      count: this.state.count++
     })
     this.fetchNews();
   }

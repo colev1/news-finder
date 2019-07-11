@@ -1,13 +1,20 @@
 .articles-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* justify-content: space-around; */
   background-color: #C4CAD0;
-
-
 }
 
 li {
   width: 400px;
   list-style: none;
+}
+
+.show-more-button {
+  /* border: solid 1px black; */
+}
+
+img {
+  height: 20px;
+  /* width: 10px; */
 }
