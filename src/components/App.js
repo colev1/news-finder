@@ -29,13 +29,11 @@ class App extends Component {
 
   displayArticles = (articles) => {
     let currentArticles = this.state.articles;
-    let urls = currentArticles.map(article => 
-      article.url
-    )
+    let urls = currentArticles.map(article => article.url)
     articles.forEach(article => {
       if(urls.includes(article.url)) {
       } else {
-        currentArticles.push(article)
+        currentArticles.push({...article, id: currentArticles.length})
       }
     })
 
@@ -54,12 +52,16 @@ class App extends Component {
     })
   }
 
+  expandArticle = (id) => {
+    console.log(id)
+  }
+
   render() {
     let { filter, articles, loadedArticles, count, sections } = this.state;
     return (
       <div className="App">
         {loadedArticles ? <Form changeFilter={this.changeFilter} filter={filter} /> : <Nav fetchNews={this.fetchNews} showArticles={loadedArticles} />}
-        <Main articles={articles} fetchNews={this.fetchNews} filter={filter} count={count} sections={sections}/>
+        <Main articles={articles} fetchNews={this.fetchNews} filter={filter} expandArticle={this.expandArticle}/>
       </div>
     )
   }
