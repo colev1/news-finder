@@ -2,8 +2,7 @@ import React from 'react';
 import '../styling/Main.css';
 import chevron from '../down-chevron.png';
 
-
-const Main = ({ articles, showMoreArticles, filter }) => {
+const Main = ({ articles, fetchNews, filter }) => {
   let matchingArticles;
   if (filter) {
     matchingArticles = articles.filter(article => {
@@ -13,8 +12,8 @@ const Main = ({ articles, showMoreArticles, filter }) => {
     matchingArticles = articles;
   }
 
-  let displayedArticles = matchingArticles.map((article, i) => {
-    return <li key={i}>
+  let displayedArticles = matchingArticles.map(article => {
+    return <li key={article.url}>
       <h4> {article.title} </h4>
       <p> {article.byline}  </p>
     </li>
@@ -23,8 +22,8 @@ const Main = ({ articles, showMoreArticles, filter }) => {
   return (
     <div className="articles-container">
       <ul>{displayedArticles}</ul>
-      {articles.length ? <button onClick={showMoreArticles} className="show-more-button"> 
-      <img src ={chevron} onClick={showMoreArticles}/> </button> : null}
+      {articles.length ? <button onClick={fetchNews} className="show-more-button">
+        <img src={chevron} /> </button> : null}
     </div>
   )
 }

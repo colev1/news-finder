@@ -12,13 +12,13 @@ class App extends Component {
       articles: [],
       filter: '',
       count: 0,
-      sections: ['home','arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
+      sections: ['arts', 'automobiles','books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
       loadedArticles: false
     }
   }
 
   fetchNews = () => {
-    const {sections, count} = this.state;
+    let { sections, count } = this.state;
     let url = `https://api.nytimes.com/svc/topstories/v2/${sections[count]}.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE`;
     fetch(url)
       .then(response => response.json())
@@ -28,34 +28,38 @@ class App extends Component {
   }
 
   displayArticles = (articles) => {
-      this.setState({
-        articles: this.state.articles.concat(articles)
-      })
-    this.setState({
-      loadedArticles: true
+    let currentArticles = this.state.articles;
+    let urls = currentArticles.map(article => 
+      article.url
+    )
+    articles.forEach(article => {
+      if(urls.includes(article.url)) {
+      } else {
+        currentArticles.push(article)
+      }
     })
-  }
 
-  showMoreArticles = () => {
     this.setState({
-      count: this.state.count++
+      articles: currentArticles,
+      loadedArticles: true,
     })
-    this.fetchNews();
+    this.setState({
+      count: this.state.count + 1
+    })
   }
 
   changeFilter = (e) => {
-    console.log(e.target.value)
     this.setState({
       filter: e.target.value
     })
   }
 
   render() {
-    const { filter, articles, loadedArticles } = this.state;
+    let { filter, articles, loadedArticles, count, sections } = this.state;
     return (
       <div className="App">
         {loadedArticles ? <Form changeFilter={this.changeFilter} filter={filter} /> : <Nav fetchNews={this.fetchNews} showArticles={loadedArticles} />}
-        <Main articles={articles} showMoreArticles={this.showMoreArticles} filter={filter} />
+        <Main articles={articles} fetchNews={this.fetchNews} filter={filter} count={count} sections={sections}/>
       </div>
     )
   }
