@@ -10,15 +10,16 @@ class App extends Component {
     super();
     this.state = {
       articles: [],
-      limit: 10,
-      offset: 0,
-      filter: ''
+      filter: '',
+      count: 0,
+      sections: ['arts', 'automobiles','books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
+      loadedArticles: false
     }
   }
 
   fetchNews = () => {
-    const { limit, offset } = this.state;
-    let url = `https://api.nytimes.com/svc/news/v3/content/nyt/all.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE&limit=${limit}&offset=${offset}`
+    let { sections, count } = this.state;
+    let url = `https://api.nytimes.com/svc/topstories/v2/${sections[count]}.json?api-key=l0v3Eo88AnIzzFYKaws93M7gOCQ9UBjE`;
     fetch(url)
       .then(response => response.json())
       .then(result => cleanArticles(result.results))
@@ -27,48 +28,42 @@ class App extends Component {
   }
 
   displayArticles = (articles) => {
-    if (!this.state.offset) {
-      this.setState({
-        articles
-      })
-    } else {
-      this.setState({
-        articles: this.state.articles.concat(articles)
-      })
-    }
-  }
-
-  showMoreArticles = () => {
-    this.setState({
-      offset: this.state.offset + 10
+    let currentArticles = this.state.articles;
+    let urls = currentArticles.map(article => article.url)
+    articles.forEach(article => {
+      if(urls.includes(article.url)) {
+      } else {
+        currentArticles.push({...article, id: currentArticles.length})
+      }
     })
-    this.fetchNews();
+
+    this.setState({
+      articles: currentArticles,
+      loadedArticles: true,
+    })
+    this.setState({
+      count: this.state.count + 1
+    })
   }
 
   changeFilter = (e) => {
-    console.log(e.target.value)
     this.setState({
       filter: e.target.value
     })
   }
 
+  expandArticle = (id) => {
+    console.log(id)
+  }
+
   render() {
-    const {filter, articles} = this.state; 
-    if (this.state.articles.length) {
-      return (
-        <div className="App">
-          <Nav fetchNews={this.fetchNews} />
-          <Form changeFilter={this.changeFilter} filter={filter}/>
-          <Main articles={articles} showMoreArticles={this.showMoreArticles} filter={filter} />
-        </div>
-      );
-    } else {
-      return (
-        <div className="App">
-          <Nav fetchNews={this.fetchNews} />
-        </div>
-      );
-    }
+    let { filter, articles, loadedArticles, count, sections } = this.state;
+    return (
+      <div className="App">
+        {loadedArticles ? <Form changeFilter={this.changeFilter} filter={filter} /> : <Nav fetchNews={this.fetchNews} showArticles={loadedArticles} />}
+        <Main articles={articles} fetchNews={this.fetchNews} filter={filter} expandArticle={this.expandArticle}/>
+      </div>
+    )
   }
 }
 

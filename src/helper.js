@@ -7,7 +7,8 @@ const cleanArticles = (articles) => {
       abstract: article.abstract,
       byline: article.byline,
       media: article.multimedia,
-      section: article.section
+      section: article.section,
+      url: article.url
     }
   })
 }
