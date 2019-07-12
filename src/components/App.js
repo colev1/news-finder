@@ -4,6 +4,7 @@ import cleanArticles from '../helper';
 import Main from './Main';
 import Form from './Form';
 import Nav from './Nav';
+import Home from './Home'
 import ArticleDetails from './ArticleDetails';
 import { Route, NavLink, withRouter, Switch } from 'react-router-dom';
 
@@ -15,7 +16,7 @@ class App extends Component {
       articles: [],
       filter: '',
       count: 0,
-      sections: ['arts', 'automobiles','books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
+      sections: ['arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
       loadedArticles: false
     }
   }
@@ -34,9 +35,9 @@ class App extends Component {
     let currentArticles = this.state.articles;
     let urls = currentArticles.map(article => article.url)
     articles.forEach(article => {
-      if(urls.includes(article.url)) {
+      if (urls.includes(article.url)) {
       } else {
-        currentArticles.push({...article, id: currentArticles.length})
+        currentArticles.push({ ...article, id: currentArticles.length })
       }
     })
 
@@ -61,20 +62,18 @@ class App extends Component {
   }
 
   render() {
-    let { filter, articles, loadedArticles, count, sections } = this.state;
+    let { filter, articles, loadedArticles } = this.state;
     return (
       <div className="App">
-        {loadedArticles ? <Form changeFilter={this.changeFilter} filter={filter} /> : <Nav fetchNews={this.fetchNews} showArticles={loadedArticles} />}
-        <Main articles={articles} fetchNews={this.fetchNews} filter={filter} expandArticle={this.expandArticle}/>
-      <Switch>
-        <Route exact path='/' component={Nav} />
-        <Route path = '/articles/:id' render={({match}) => {
+        <Switch>
+          <Route exact path='/' render={(props) => <Home {...props} expandArticle={this.expandArticle} changeFilter={this.changeFilter} filter={filter} fetchNews={this.fetchNews} articles={articles} loadedArticles={loadedArticles} />} />
+          <Route path='/articles/:id' render={({ match }) => {
             const article = this.state.articles.find((article) => (
-                article.id === parseInt(match.params.id)
-            ));
+              article.id === parseInt(match.params.id)
+              ));
             return <ArticleDetails {...article} />
-        }} />
-      </Switch>
+          }} />
+        </Switch>
       </div>
     )
   }

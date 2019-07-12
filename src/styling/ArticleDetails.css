@@ -1,0 +1,15 @@
+.article {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  justify-content: space-between;
+  margin: 20px;
+  overflow: scroll;
+  padding: 40px;
+}
+
+.article-image {
+  height: 400px;
+}
