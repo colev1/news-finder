@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styling/Main.css';
 import chevron from '../down-chevron.png';
+import { Route, Link, withRouter, Switch } from 'react-router-dom';
+
 
 const Main = ({ articles, fetchNews, filter, expandArticle }) => {
   let matchingArticles;
@@ -13,17 +15,17 @@ const Main = ({ articles, fetchNews, filter, expandArticle }) => {
   }
 
   let displayedArticles = matchingArticles.map(article => {
-    return <li key={article.id} onClick={()=>expandArticle(article.id)}>
+    return <Link to={`/articles/${article.id}`} key={article.id} className="list-item"> 
       <h4> {article.title} </h4>
       <p> {article.byline}  </p>
-    </li>
+    </Link>
   })
 
   return (
     <div className="articles-container">
       <ul>{displayedArticles}</ul>
       {articles.length ? <button onClick={fetchNews} className="show-more-button">
-        <img src={chevron} alt="Show more button."/> </button> : null}
+        <img src={chevron} alt="Show more button." /> </button> : null}
     </div>
   )
 }

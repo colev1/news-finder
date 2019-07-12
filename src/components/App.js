@@ -4,6 +4,9 @@ import cleanArticles from '../helper';
 import Main from './Main';
 import Form from './Form';
 import Nav from './Nav';
+import ArticleDetails from './ArticleDetails';
+import { Route, NavLink, withRouter, Switch } from 'react-router-dom';
+
 
 class App extends Component {
   constructor() {
@@ -53,7 +56,8 @@ class App extends Component {
   }
 
   expandArticle = (id) => {
-    console.log(id)
+    console.log(id);
+
   }
 
   render() {
@@ -62,6 +66,15 @@ class App extends Component {
       <div className="App">
         {loadedArticles ? <Form changeFilter={this.changeFilter} filter={filter} /> : <Nav fetchNews={this.fetchNews} showArticles={loadedArticles} />}
         <Main articles={articles} fetchNews={this.fetchNews} filter={filter} expandArticle={this.expandArticle}/>
+      <Switch>
+        <Route exact path='/' component={Nav} />
+        <Route path = '/articles/:id' render={({match}) => {
+            const article = this.state.articles.find((article) => (
+                article.id === parseInt(match.params.id)
+            ));
+            return <ArticleDetails {...article} />
+        }} />
+      </Switch>
       </div>
     )
   }
