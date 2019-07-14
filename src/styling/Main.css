@@ -1,12 +1,45 @@
 .articles-container {
-  background-color: #C4CAD0;
+  background-color: #c4cad0;
+  padding-bottom: 20px;
 }
 
-li {
+a {
   width: 400px;
   list-style: none;
+  /* style */
+  background-color: white;
 }
 
 img {
   height: 20px;
+}
+
+.list-item {
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  margin: 10px;
+}
+
+.list-item:hover {
+  color: grey;
+}
+
+ul {
+  text-align: left;
+}
+
+.show-more-button {
+  margin-left: 40%;
+  justify-content: center;
+  border-radius: 2%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.show-more-button:hover {
+  cursor: pointer;
+  color: grey;
 }

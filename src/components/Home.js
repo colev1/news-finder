@@ -13,7 +13,6 @@ const Home = ({ changeFilter, filter, fetchNews, expandArticle, articles, loaded
         articles={articles}
         fetchNews={fetchNews}
         filter={filter}
-        expandArticle={expandArticle}
       />
     </div>
   )

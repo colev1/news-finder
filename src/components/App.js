@@ -29,6 +29,7 @@ class App extends Component {
       .then(result => cleanArticles(result.results))
       .then(articles => this.displayArticles(articles))
       .catch(err => console.log(err))
+    this.setState({ filter: '' })
   }
 
   displayArticles = (articles) => {
@@ -56,21 +57,16 @@ class App extends Component {
     })
   }
 
-  expandArticle = (id) => {
-    console.log(id);
-
-  }
-
   render() {
     let { filter, articles, loadedArticles } = this.state;
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' render={(props) => <Home {...props} expandArticle={this.expandArticle} changeFilter={this.changeFilter} filter={filter} fetchNews={this.fetchNews} articles={articles} loadedArticles={loadedArticles} />} />
+          <Route exact path='/' render={(props) => <Home {...props} changeFilter={this.changeFilter} filter={filter} fetchNews={this.fetchNews} articles={articles} loadedArticles={loadedArticles} />} />
           <Route path='/articles/:id' render={({ match }) => {
             const article = this.state.articles.find((article) => (
               article.id === parseInt(match.params.id)
-              ));
+            ));
             return <ArticleDetails {...article} />
           }} />
         </Switch>
