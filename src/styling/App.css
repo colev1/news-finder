@@ -6,3 +6,10 @@
   display: grid;
   grid-template-rows: 160px 1fr;
 }
+
+.source {
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  background-color: white;
+}

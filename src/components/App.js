@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import '../styling/App.css';
 import cleanArticles from '../helper';
-import Main from './Main';
-import Form from './Form';
-import Nav from './Nav';
 import Home from './Home'
 import ArticleDetails from './ArticleDetails';
-import { Route, NavLink, withRouter, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 class App extends Component {
@@ -17,7 +14,8 @@ class App extends Component {
       filter: '',
       count: 0,
       sections: ['arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world'],
-      loadedArticles: false
+      loadedArticles: false,
+      specificArticle: {}
     }
   }
 
@@ -63,12 +61,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path='/' render={(props) => <Home {...props} changeFilter={this.changeFilter} filter={filter} fetchNews={this.fetchNews} articles={articles} loadedArticles={loadedArticles} />} />
-          <Route path='/articles/:id' render={({ match }) => {
-            const article = this.state.articles.find((article) => (
-              article.id === parseInt(match.params.id)
-            ));
-            return <ArticleDetails {...article} />
-          }} />
+          <Route path='/articles/:headline' render={(props) => <ArticleDetails {...props} articles={this.state.articles} /> } />
         </Switch>
       </div>
     )
