@@ -1,8 +1,6 @@
 import React from 'react';
 import '../styling/Main.css';
-import chevron from '../down-chevron.png';
 import { Link } from 'react-router-dom';
-
 
 const Main = ({ articles, fetchNews, filter }) => {
   let matchingArticles;
@@ -15,7 +13,7 @@ const Main = ({ articles, fetchNews, filter }) => {
   }
 
   let displayedArticles = matchingArticles.map(article => {
-    return <Link to={`/articles/${article.id}`} key={article.id} className="list-item">
+    return <Link to={`/articles/${article.title}`} key={article.id} className="list-item">
       <h4> {article.title} </h4>
       <p> {article.byline}  </p>
     </Link>
@@ -25,7 +23,7 @@ const Main = ({ articles, fetchNews, filter }) => {
     <div className="articles-container">
       <ul>{displayedArticles}</ul>
       {articles.length ? <button onClick={fetchNews} className="show-more-button">
-        Load more..
+        Load more articles
       </button> : null}
     </div>
   )

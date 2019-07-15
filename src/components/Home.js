@@ -3,10 +3,10 @@ import Main from './Main';
 import Form from './Form';
 import Nav from './Nav';
 
-const Home = ({ changeFilter, filter, fetchNews, expandArticle, articles, loadedArticles }) => {
+const Home = ({ changeFilter, filter, fetchNews, articles, loadedArticles }) => {
   return (
     <div>
-      {loadedArticles ?
+      { loadedArticles ?
         <Form changeFilter={changeFilter} filter={filter} />
         : <Nav fetchNews={fetchNews} />}
       <Main
