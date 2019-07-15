@@ -5,7 +5,7 @@ import arrow from '../arrow-right-solid.svg';
 const Nav = ({ fetchNews }) => {
   return (
     <div className="nav-container">
-      <h1> Click to view Top New York Times articles </h1>
+      <h1> Click to load top New York Times articles </h1>
       <img onClick={fetchNews} className="nav-button" src={arrow} alt="Arrow right button." />
     </div>
   )

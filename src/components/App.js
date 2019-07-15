@@ -63,6 +63,9 @@ class App extends Component {
           <Route exact path='/' render={(props) => <Home {...props} changeFilter={this.changeFilter} filter={filter} fetchNews={this.fetchNews} articles={articles} loadedArticles={loadedArticles} />} />
           <Route path='/articles/:headline' render={(props) => <ArticleDetails {...props} articles={this.state.articles} /> } />
         </Switch>
+        <div className="source">
+          source: https://developer.nytimes.com/
+        </div>
       </div>
     )
   }
