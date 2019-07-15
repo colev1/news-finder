@@ -1,7 +1,7 @@
 # News Finder: 
 
 ## Description:
-The goal is to build a web app using React and any publicly accessible API.  I chose to use the New York Times API, specifically the top stories and search endpoints.  This application allows users to view current top stories in the Times.  Users can also view more information about a story by clicking on the individual story.
+The goal is to build a web app using React and any publicly accessible API.  I chose to use the New York Times API, specifically the top stories and search endpoints.  This application allows users to view current top stories in the Times, and filter stories by typing in keywords to the input box. Users can also view more information about a story by clicking on the individual story.
 
 
 ## API 
